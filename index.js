@@ -34,7 +34,7 @@ const init = async () => {
     
 }
 const addNext = async () => {
-    const {addWhom } = await inquirer.prompt(questions.addMember);
+    const {addWhom} = await inquirer.prompt(questions.addMember);
     if (addWhom === "Engineer") {
         addEngineer();
     } else if (addWhom === "Intern") {
