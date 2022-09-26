@@ -24,5 +24,22 @@ THEN I exit the application, and the HTML is generated
 */
 
 const init = async () => {
-    const answer = await inquirer.prompt()
+    console.log('Welcome to the employee manager cli')
+    const answers = await inquirer.prompt([
+        {
+            type: 'input',
+            name: "managerName",
+            message: "What is the name of the manager?",
+            validate: (answer) => {
+                if (answer !== '') {
+                    return true
+                } else {
+                    return "Please enter at least one character for the Manager's name"
+                }
+            }
+        }
+    ])
+    console.log(answers);
 }
+
+init()
