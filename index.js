@@ -24,8 +24,9 @@ THEN I am prompted to enter the intern’s name, ID, email, and school, and I am
 WHEN I decide to finish building my team
 THEN I exit the application, and the HTML is generated
 */
-const fullTeam = [];
+let fullTeam;
 const init = async () => {
+    fullTeam = [];
     console.log('Welcome to the employee manager cli')
     const answers = await inquirer.prompt(questions.createManager);
     fullTeam.push(new Manager(answers.managerName, answers.managerId, answers.managerEmail, answers.managerOfficeNumber));
@@ -33,26 +34,39 @@ const init = async () => {
     
 }
 const addNext = async () => {
-    const nextEmployee = await inquirer.prompt(questions.addMember);
-    if (nextEmployee === "Engineer") {
+    const {addWhom } = await inquirer.prompt(questions.addMember);
+    if (addWhom === "Engineer") {
         addEngineer();
-    } else if (nextEmployee === "Intern") {
+    } else if (addWhom === "Intern") {
         addIntern();
     } else {
         console.log(`Thanks for using the CLI Employee Manager`)
+        // TODO: Turn console.log into fs.writeFile
+        console.log(renderHTML());
         process.exit();
     }
 }
 
 const addEngineer = async () => {
     const engineer = await inquirer.prompt(questions.addEngineer);
-    // TODO: ADD ARGUMENTS TO INSTANCE
-    fullTeam.push(new Engineer())
+    fullTeam.push(new Engineer(engineer.engineerName, engineer.engineerId, engineer.engineerEmail, engineer.engineerGithub))
+    addNext()
 }
 const addIntern = async () => {
     const intern = await inquirer.prompt(questions.addIntern);
-    // TODO: ADD ARGUMENTS TO INSTANCE
-    fullTeam.push(new Intern())
+    fullTeam.push(new Intern(intern.internName, intern.internId, intern.internEmail, intern.internSchool))
+    addNext()
+}
+
+const renderHTML = () => {
+    // TODO: ADD HTML HEADING
+    let html = ``
+    for (let employee of fullTeam) {
+        html += employee.renderSelf()
+    }
+    // TODO: ADD HTML FOOTING
+    html += ``
+    return html;
 }
 
 init()

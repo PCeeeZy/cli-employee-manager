@@ -61,24 +61,23 @@ module.exports = {
             ]
         }
     ],
-    // TODO: the following questions are all copy pasted from template above. please go thru and modify to be correct
     addEngineer: [
         {
             type: 'input',
-            name: "managerName",
-            message: "What is the name of the manager?",
+            name: "engineerName",
+            message: "What is the name of the engineer?",
             validate: (answer) => {
                 if (answer !== '') {
                     return true
                 } else {
-                    return "Please enter at least one character for the Manager's name"
+                    return "Please enter at least one character for the engineer's name"
                 }
             }
         },
         {
             type: 'input',
-            name: "managerId",
-            message: "What is the manager's id?",
+            name: "engineerId",
+            message: "What is the engineer's id?",
             validate: (answer) => {
                 const validId = answer.match(/^[1-9]\d*$/);
                 if (validId) {
@@ -90,8 +89,8 @@ module.exports = {
         },
             {
             type: 'input',
-            name: 'managerEmail',
-            message: "What is the team manager's email?",
+            name: 'engineerEmail',
+            message: "What is the engineer's email?",
             validate: (answer) => {
                 const validEmail = answer.match(/\S+@\S+\.\S+/);
                 if (validEmail) {
@@ -102,34 +101,33 @@ module.exports = {
         },
         {
             type: 'input',
-            name: 'managerOfficeNumber',
-            message: "What is the team manager's office number?",
+            name: 'engineerGithub',
+            message: "What is the engineer's github username?",
             validate: (answer) => {
                 if (answer !== '') {
                     return true;
                 }
-                return 'Please enter an office number';
+                return 'Please enter the username';
             }
         },
     ],
-    // TODO: the following questions are all copy pasted from template above. please go thru and modify to be correct
     addIntern: [
         {
             type: 'input',
-            name: "managerName",
-            message: "What is the name of the manager?",
+            name: "internName",
+            message: "What is the name of the intern?",
             validate: (answer) => {
                 if (answer !== '') {
                     return true
                 } else {
-                    return "Please enter at least one character for the Manager's name"
+                    return "Please enter at least one character for the intern's name"
                 }
             }
         },
         {
             type: 'input',
-            name: "managerId",
-            message: "What is the manager's id?",
+            name: "internId",
+            message: "What is the intern's id?",
             validate: (answer) => {
                 const validId = answer.match(/^[1-9]\d*$/);
                 if (validId) {
@@ -141,8 +139,8 @@ module.exports = {
         },
             {
             type: 'input',
-            name: 'managerEmail',
-            message: "What is the team manager's email?",
+            name: 'internEmail',
+            message: "What is the intern's email?",
             validate: (answer) => {
                 const validEmail = answer.match(/\S+@\S+\.\S+/);
                 if (validEmail) {
@@ -153,13 +151,13 @@ module.exports = {
         },
         {
             type: 'input',
-            name: 'managerOfficeNumber',
-            message: "What is the team manager's office number?",
+            name: 'internSchool',
+            message: "What is the intern's school?",
             validate: (answer) => {
                 if (answer !== '') {
                     return true;
                 }
-                return 'Please enter an office number';
+                return 'Please enter a school';
             }
         },
     ]
