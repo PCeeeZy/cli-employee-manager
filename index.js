@@ -1,4 +1,5 @@
 const inquirer = require('inquirer');
+const fs = require('fs')
 const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern');
 const Manager = require('./lib/Manager');
@@ -42,8 +43,10 @@ const addNext = async () => {
         addIntern();
     } else {
         console.log(`Thanks for using the CLI Employee Manager`)
-        // TODO: Turn console.log into fs.writeFile
-        console.log(renderHTML(fullTeam));
+        console.log(fs.writeFile("./dist/output.html", renderHTML(fullTeam), (err)=> {
+            if (err) throw err;
+            console.log(`HTML generated`)
+        }))
         process.exit();
     }
 }
