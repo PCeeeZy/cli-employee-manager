@@ -3,6 +3,8 @@ const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern');
 const Manager = require('./lib/Manager');
 
+const questions = require('./util/questions');
+
 /*
 GIVEN a command-line application that accepts user input
 WHEN I am prompted for my team members and their information
@@ -25,20 +27,7 @@ THEN I exit the application, and the HTML is generated
 
 const init = async () => {
     console.log('Welcome to the employee manager cli')
-    const answers = await inquirer.prompt([
-        {
-            type: 'input',
-            name: "managerName",
-            message: "What is the name of the manager?",
-            validate: (answer) => {
-                if (answer !== '') {
-                    return true
-                } else {
-                    return "Please enter at least one character for the Manager's name"
-                }
-            }
-        }
-    ])
+    const answers = await inquirer.prompt(questions.createManager)
     console.log(answers);
 }
 
