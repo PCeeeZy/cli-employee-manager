@@ -4,6 +4,7 @@ const Intern = require('./lib/Intern');
 const Manager = require('./lib/Manager');
 
 const questions = require('./util/questions');
+const renderHTML = require('./util/renderHTML');
 
 /*
 GIVEN a command-line application that accepts user input
@@ -56,17 +57,6 @@ const addIntern = async () => {
     const intern = await inquirer.prompt(questions.addIntern);
     fullTeam.push(new Intern(intern.internName, intern.internId, intern.internEmail, intern.internSchool))
     addNext()
-}
-
-const renderHTML = () => {
-    // TODO: ADD HTML HEADING
-    let html = ``
-    for (let employee of fullTeam) {
-        html += employee.renderSelf()
-    }
-    // TODO: ADD HTML FOOTING
-    html += ``
-    return html;
 }
 
 init()
