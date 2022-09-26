@@ -1,5 +1,4 @@
 const renderHTML = (roster) => {
-    // TODO: ADD HTML HEADING
     let html = `<!DOCTYPE html>
     <html lang="en">
     
@@ -28,7 +27,6 @@ const renderHTML = (roster) => {
     for (let employee of roster) {
         html += employee.renderSelf()
     }
-    // TODO: ADD HTML FOOTING
     html += `</div>
     </div>
 </div>

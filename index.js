@@ -43,10 +43,10 @@ const addNext = async () => {
         addIntern();
     } else {
         console.log(`Thanks for using the CLI Employee Manager`)
-        console.log(fs.writeFile("./dist/output.html", renderHTML(fullTeam), (err)=> {
+        fs.writeFile("./dist/output.html", renderHTML(fullTeam), (err)=> {
             if (err) throw err;
             console.log(`HTML generated`)
-        }))
+        })
         process.exit();
     }
 }
