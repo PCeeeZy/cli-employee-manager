@@ -1,4 +1,4 @@
-const renderHTML = () => {
+const renderHTML = (roster) => {
     // TODO: ADD HTML HEADING
     let html = `<!DOCTYPE html>
     <html lang="en">
@@ -25,7 +25,7 @@ const renderHTML = () => {
         <div class="container">
             <div class="row">
                 <div class="team-area col-12 d-flex justify-content-center">`
-    for (let employee of fullTeam) {
+    for (let employee of roster) {
         html += employee.renderSelf()
     }
     // TODO: ADD HTML FOOTING

@@ -43,7 +43,7 @@ const addNext = async () => {
     } else {
         console.log(`Thanks for using the CLI Employee Manager`)
         // TODO: Turn console.log into fs.writeFile
-        console.log(renderHTML());
+        console.log(renderHTML(fullTeam));
         process.exit();
     }
 }
