@@ -24,11 +24,35 @@ THEN I am prompted to enter the intern’s name, ID, email, and school, and I am
 WHEN I decide to finish building my team
 THEN I exit the application, and the HTML is generated
 */
-
+const fullTeam = [];
 const init = async () => {
     console.log('Welcome to the employee manager cli')
-    const answers = await inquirer.prompt(questions.createManager)
-    console.log(answers);
+    const answers = await inquirer.prompt(questions.createManager);
+    fullTeam.push(new Manager(answers.managerName, answers.managerId, answers.managerEmail, answers.managerOfficeNumber));
+    addNext();
+    
+}
+const addNext = async () => {
+    const nextEmployee = await inquirer.prompt(questions.addMember);
+    if (nextEmployee === "Engineer") {
+        addEngineer();
+    } else if (nextEmployee === "Intern") {
+        addIntern();
+    } else {
+        console.log(`Thanks for using the CLI Employee Manager`)
+        process.exit();
+    }
+}
+
+const addEngineer = async () => {
+    const engineer = await inquirer.prompt(questions.addEngineer);
+    // TODO: ADD ARGUMENTS TO INSTANCE
+    fullTeam.push(new Engineer())
+}
+const addIntern = async () => {
+    const intern = await inquirer.prompt(questions.addIntern);
+    // TODO: ADD ARGUMENTS TO INSTANCE
+    fullTeam.push(new Intern())
 }
 
 init()
