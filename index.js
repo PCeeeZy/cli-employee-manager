@@ -45,9 +45,11 @@ const addNext = async () => {
         console.log(`Thanks for using the CLI Employee Manager`)
         fs.writeFile("./dist/output.html", renderHTML(fullTeam), (err)=> {
             if (err) throw err;
-            console.log(`HTML generated`)
+            else {
+                console.log(`HTML generated`);
+                process.exit();
+            }
         })
-        process.exit();
     }
 }
 
