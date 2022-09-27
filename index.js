@@ -1,12 +1,3 @@
-const inquirer = require('inquirer');
-const fs = require('fs')
-const Engineer = require('./lib/Engineer');
-const Intern = require('./lib/Intern');
-const Manager = require('./lib/Manager');
-
-const questions = require('./util/questions');
-const renderHTML = require('./util/renderHTML');
-
 /*
 GIVEN a command-line application that accepts user input
 WHEN I am prompted for my team members and their information
@@ -27,40 +18,12 @@ WHEN I decide to finish building my team
 THEN I exit the application, and the HTML is generated
 */
 
-const init = async (currTeam = []) => {
-    console.log('Welcome to the employee manager cli')
-    const answers = await inquirer.prompt(questions.createManager);
-    currTeam.push(new Manager(answers.managerName, answers.managerId, answers.managerEmail, answers.managerOfficeNumber));
-    addNext(currTeam);
-    
-}
-const addNext = async (currTeam) => {
-    const {addWhom} = await inquirer.prompt(questions.addMember);
-    if (addWhom === "Engineer") {
-        addEngineer(currTeam);
-    } else if (addWhom === "Intern") {
-        addIntern(currTeam);
-    } else {
-        console.log(`Thanks for using the CLI Employee Manager`)
-        fs.writeFile("./dist/output.html", renderHTML(currTeam), (err)=> {
-            if (err) throw err;
-            else {
-                console.log(`HTML generated`);
-                process.exit();
-            }
-        })
-    }
-}
+const {addManager} = require("./util/rosterController");
 
-const addEngineer = async (currTeam) => {
-    const engineer = await inquirer.prompt(questions.addEngineer);
-    currTeam.push(new Engineer(engineer.engineerName, engineer.engineerId, engineer.engineerEmail, engineer.engineerGithub))
-    addNext(currTeam)
-}
-const addIntern = async (currTeam) => {
-    const intern = await inquirer.prompt(questions.addIntern);
-    currTeam.push(new Intern(intern.internName, intern.internId, intern.internEmail, intern.internSchool))
-    addNext(currTeam)
+const init = async () => {
+    let newTeam = []
+    console.log('Welcome to the CLI-Employee-Manager');
+    addManager(newTeam);     
 }
 
 init()
