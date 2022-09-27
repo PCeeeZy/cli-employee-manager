@@ -26,24 +26,23 @@ THEN I am prompted to enter the intern’s name, ID, email, and school, and I am
 WHEN I decide to finish building my team
 THEN I exit the application, and the HTML is generated
 */
-let fullTeam;
-const init = async () => {
-    fullTeam = [];
+
+const init = async (currTeam = []) => {
     console.log('Welcome to the employee manager cli')
     const answers = await inquirer.prompt(questions.createManager);
-    fullTeam.push(new Manager(answers.managerName, answers.managerId, answers.managerEmail, answers.managerOfficeNumber));
-    addNext();
+    currTeam.push(new Manager(answers.managerName, answers.managerId, answers.managerEmail, answers.managerOfficeNumber));
+    addNext(currTeam);
     
 }
-const addNext = async () => {
+const addNext = async (currTeam) => {
     const {addWhom} = await inquirer.prompt(questions.addMember);
     if (addWhom === "Engineer") {
-        addEngineer();
+        addEngineer(currTeam);
     } else if (addWhom === "Intern") {
-        addIntern();
+        addIntern(currTeam);
     } else {
         console.log(`Thanks for using the CLI Employee Manager`)
-        fs.writeFile("./dist/output.html", renderHTML(fullTeam), (err)=> {
+        fs.writeFile("./dist/output.html", renderHTML(currTeam), (err)=> {
             if (err) throw err;
             else {
                 console.log(`HTML generated`);
@@ -53,15 +52,15 @@ const addNext = async () => {
     }
 }
 
-const addEngineer = async () => {
+const addEngineer = async (currTeam) => {
     const engineer = await inquirer.prompt(questions.addEngineer);
-    fullTeam.push(new Engineer(engineer.engineerName, engineer.engineerId, engineer.engineerEmail, engineer.engineerGithub))
-    addNext()
+    currTeam.push(new Engineer(engineer.engineerName, engineer.engineerId, engineer.engineerEmail, engineer.engineerGithub))
+    addNext(currTeam)
 }
-const addIntern = async () => {
+const addIntern = async (currTeam) => {
     const intern = await inquirer.prompt(questions.addIntern);
-    fullTeam.push(new Intern(intern.internName, intern.internId, intern.internEmail, intern.internSchool))
-    addNext()
+    currTeam.push(new Intern(intern.internName, intern.internId, intern.internEmail, intern.internSchool))
+    addNext(currTeam)
 }
 
 init()
